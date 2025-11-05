@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+.env.local
+
+# logs
+logs/
+*.log
+
+# runtime data
+pids/
+*.pid
+*.seed
+
+# uploads
+uploads/
+
+# build outputs
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# temp
+tmp/
+temp/
