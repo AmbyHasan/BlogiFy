@@ -5,8 +5,20 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app=express();
+const allowedOrigins = [
+    process.env.CORS_ORIGIN,
+    process.env.FRONTEND_URL,
+    "https://blogify-frontend-ashen-tau.vercel.app",
+    "http://localhost:5173",
+].filter(Boolean);
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials:true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']

@@ -7,6 +7,12 @@ import { User } from "../models/user.model.js"
 
 import { generateAccessAndRefreshToken } from "../utils/generateAccessTokenAndRefreshToken.js"
 
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+};
+
 
 
 
@@ -53,14 +59,9 @@ const SignUpUser= asyncHandler( async(req ,res)=>{
     // Generate access and refresh tokens for auto-login
     const {accesstoken , refreshtoken}= await generateAccessAndRefreshToken(user._id);
 
-    const options={
-        httpOnly:true ,
-        secure: false
-    }
-
    return res.status(200)
-   .cookie("accesstoken"  , accesstoken , options)
-   .cookie("refreshtoken" , refreshtoken ,options)
+   .cookie("accesstoken"  , accesstoken , cookieOptions)
+   .cookie("refreshtoken" , refreshtoken , cookieOptions)
    .json(new ApiResponse(200 , createdUser , "User created successfully"));
 
     })
@@ -93,15 +94,9 @@ const SignInUser = asyncHandler( async(req  ,res)=>{
      //now send the info to the user
      const loggedInUser= await User.findById(user._id).select("-password");
 
-      const options={
-      httpOnly:true, //cookies are only modifiable by the server
-      secure: false
-   }
-
-
       return res.status(200)
-      .cookie("accesstoken"  , accesstoken , options)
-      .cookie("refreshtoken" , refreshtoken ,options)
+        .cookie("accesstoken"  , accesstoken , cookieOptions)
+        .cookie("refreshtoken" , refreshtoken ,cookieOptions)
       .json(new ApiResponse(200 ,
         {
         user : loggedInUser  , accesstoken , refreshtoken
@@ -125,11 +120,7 @@ const LogOutUser=asyncHandler(async (req ,res)=>{
              new:true
         }  
     )
-    const options={
-        httpOnly:true ,
-        secure: false
-    }
-    return res.status(200).clearCookie("accesstoken" ,options).clearCookie("refreshtoken" ,options)
+    return res.status(200).clearCookie("accesstoken" ,cookieOptions).clearCookie("refreshtoken" ,cookieOptions)
     .json(new ApiResponse(200 ,{id} ,"user logged out successfully"));
 })
 
@@ -177,13 +168,7 @@ const refreshAccessToken=asyncHandler(async(req ,res)=>{
      await user.save({ validateBeforeSave: false });
 
 
-     const options={
-         httpOnly:true ,
-         secure: false
-     }
-
-
-     return res.status(200).cookie("accesstoken" , accesstoken , options).cookie("refreshtoken" , refreshtoken , options)
+     return res.status(200).cookie("accesstoken" , accesstoken , cookieOptions).cookie("refreshtoken" , refreshtoken , cookieOptions)
      .json(new ApiResponse(200 , {user , accesstoken , refreshtoken} , "New refresh token generated successfully"));
    } catch (error) {
       return new ApiError(400 , "unable to genrate refresh token")
