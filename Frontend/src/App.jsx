@@ -19,7 +19,7 @@ function App() {
     const checkCurrentUser = async () => {
       try {
         const response = await axios.get(
-  `${import.meta.env.VITE_API_URL}/user/current-user`,
+  `${import.meta.env.VITE_API_URL}/api/v1/user/current-user`,
   {
     withCredentials: true,
   }

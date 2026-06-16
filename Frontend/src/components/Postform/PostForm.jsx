@@ -61,7 +61,7 @@ const PostForm = ({post}) => {
              "${import.meta.env.VITE_API_URL}/api/v1/posts/create-post",
              formData ,
                        {
-            withCredentials: true, // ✅ include cookies
+            withCredentials: true, //  include cookies
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -136,7 +136,7 @@ const PostForm = ({post}) => {
                 {post?.featuredImage && (
           <div className="w-full mb-4">
             <img
-              src={`${import.meta.env.VITE_API_URL}/uploads/${post.featuredImage}`}
+              src={`${import.meta.env.VITE_API_URL}api/v1/posts/uploads/${post.featuredImage}`}
               alt={post.title}
               className="rounded-lg"
             />
