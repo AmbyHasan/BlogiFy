@@ -45,7 +45,7 @@ const PostForm = ({post}) => {
         
       response= await axios.put(
         //post id is present in the post prop
-         `http://localhost:8000/api/v1/posts/update-post/${post._id}`,
+         `${import.meta.env.VITE_API_URL}/api/v1/posts/update-post/${post._id}`,
          formData ,
          {
           withCredentials:true ,
@@ -58,7 +58,7 @@ const PostForm = ({post}) => {
       }else{
 
           response=await axios.post(
-             "http://localhost:8000/api/v1/posts/create-post",
+             "${import.meta.env.VITE_API_URL}/api/v1/posts/create-post",
              formData ,
                        {
             withCredentials: true, // ✅ include cookies
@@ -136,7 +136,7 @@ const PostForm = ({post}) => {
                 {post?.featuredImage && (
           <div className="w-full mb-4">
             <img
-              src={`http://localhost:8000/uploads/${post.featuredImage}`}
+              src={`${import.meta.env.VITE_API_URL}/uploads/${post.featuredImage}`}
               alt={post.title}
               className="rounded-lg"
             />

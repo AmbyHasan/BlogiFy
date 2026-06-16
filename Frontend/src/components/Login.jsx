@@ -20,7 +20,7 @@ function Login() {
         try{
             //call the node js bakcend with login api
             const res= await axios.post(
-              "http://localhost:8000/api/v1/user/signin",
+              `${import.meta.env.VITE_API_URL}/api/v1/user/signin`,
               {
                 username:data.username ,
                 password:data.password ,

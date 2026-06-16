@@ -15,7 +15,7 @@ export default function Post() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`http://localhost:5000/api/posts/get-post/${id}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/posts/get-post/${id}`)
                 .then((res) => {
                     if (res.data.success) setPost(res.data.post);
                     else navigate("/");
@@ -28,7 +28,7 @@ export default function Post() {
 
     const deletePost = async () => {
         try {
-            const res = await axios.delete(`http://localhost:5000/api/posts/delete-post/${id}`, {
+            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/posts/delete-post/${id}`, {
                 headers: {
                    withCredentials: true,
                 },
@@ -47,7 +47,7 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={`http://localhost:8000/uploads/${post.featuredImage}`}
+                        src={`${import.meta.env.VITE_API_URL}/uploads/${post.featuredImage}`}
                         alt={post.title}
                         className="rounded-xl"
                     />

@@ -19,7 +19,7 @@ const Signup = () => {
     try{
         //send the data to the backend signup route
         const res=await axios.post(
-        "http://localhost:8000/api/v1/user/signup",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/signup`,
 
           data,
 

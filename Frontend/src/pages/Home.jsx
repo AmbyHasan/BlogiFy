@@ -9,7 +9,7 @@ function Home() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/posts/get-user-posts", {
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/v1/posts/get-user-posts", {
         withCredentials: true,
       });
 
@@ -48,7 +48,7 @@ function Home() {
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/posts/delete-post/${postId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/posts/delete-post/${postId}`, {
         withCredentials: true,
       });
       //after deleting the post call fetchPosts again for rendering the remaining post

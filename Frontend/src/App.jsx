@@ -18,9 +18,12 @@ function App() {
   useEffect(() => {
     const checkCurrentUser = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/user/current-user', {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+  `${import.meta.env.VITE_API_URL}/user/current-user`,
+  {
+    withCredentials: true,
+  }
+);
         if (response.data.statusCode === 200) {
           dispatch(login({ userData: response.data.data })); //here login is the acton creatorw
         }
