@@ -25,6 +25,5 @@ dist/
 Thumbs.db
 
 
-
-Backend/public/temp/*
-!Backend/public/temp/.gitkeep
+public/temp/*
+!public/temp/.gitkeep
