@@ -3,12 +3,13 @@ import Post from "../models/posts.model.js"
 import { ApiError } from "../utils/ApiError.js";
 import uploadOnCloudinary from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import fs from "fs";
 
 
 
 //controller for creating a post
 const CreatePost=asyncHandler(async(req ,res)=>{
-  
+
  const {title , content ,status} =req.body;
  //because status is coming in string form i would have to change it into boolean for storing in database
  const postStatus = status === "active";
