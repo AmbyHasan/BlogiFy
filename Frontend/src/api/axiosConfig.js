@@ -25,4 +25,7 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+// Also set default credentials globally as backup
+axios.defaults.withCredentials = true;
+
 export default axiosInstance;

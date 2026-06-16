@@ -9,8 +9,8 @@ import { generateAccessAndRefreshToken } from "../utils/generateAccessTokenAndRe
 
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+    secure: true,
+    sameSite: "none",
 };
 
 
