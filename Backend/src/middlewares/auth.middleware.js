@@ -12,6 +12,7 @@ export const verifyJwt=asyncHandler( async(req ,res ,next)=>{
     req.header("Authorization")?.replace("Bearer ", "");
 
   console.log("TOKEN RECEIVED:", token);
+  console.log("SECRET:", process.env.ACCESS_TOKEN_SECRET);
 
   const decodedToken = jwt.verify(
     token,
