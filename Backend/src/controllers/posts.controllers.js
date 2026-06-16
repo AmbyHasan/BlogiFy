@@ -8,6 +8,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 //controller for creating a post
 const CreatePost=asyncHandler(async(req ,res)=>{
+  
  const {title , content ,status} =req.body;
  //because status is coming in string form i would have to change it into boolean for storing in database
  const postStatus = status === "active";
@@ -18,6 +19,17 @@ const CreatePost=asyncHandler(async(req ,res)=>{
       throw new ApiError(400 , "Missing post image");
  }
  const featuredImageLocalPath=req.file.path;
+
+ console.log("FILE OBJECT:", req.file);
+console.log("FILE PATH:", req.file?.path);
+
+if (req.file?.path) {
+    console.log(
+        "FILE EXISTS:",
+        fs.existsSync(req.file.path)
+    );
+}
+
  const uploadedPost= await uploadOnCloudinary(featuredImageLocalPath);
  if(!uploadedPost) throw new ApiError(400 , "Couldnt upload your post");
 
