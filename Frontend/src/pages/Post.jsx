@@ -15,7 +15,9 @@ export default function Post() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`${import.meta.env.VITE_API_URL}/api/posts/get-post/${id}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/v1/posts/get-post/${id}`, {
+                withCredentials: true,
+            })
                 .then((res) => {
                     if (res.data.success) setPost(res.data.post);
                     else navigate("/");
@@ -28,11 +30,8 @@ export default function Post() {
 
     const deletePost = async () => {
         try {
-            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/posts/delete-post/${id}`, {
-                headers: {
-                   withCredentials: true,
-                },
-
+            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/posts/delete-post/${id}`, {
+                withCredentials: true,
             });
             if (res.data.success) {
                 navigate("/");

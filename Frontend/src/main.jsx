@@ -67,7 +67,7 @@ const Router=createBrowserRouter([
             ),
         },
         {
-            path: "/post/:slug",
+            path: "/post/:id",
             element: <Post />,
         },
     ],

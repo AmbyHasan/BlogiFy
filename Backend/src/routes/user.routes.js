@@ -9,11 +9,11 @@ import { refreshAccessToken } from "../controllers/user.controllers.js";
 
 const userRouter=Router();
 //user routes
-userRouter.route("/api/v1/user/signup").post(SignUpUser);
-userRouter.route("/api/v1/user/signin").post(SignInUser);
-userRouter.route("/api/v1/user/logout").post( verifyJwt,LogOutUser);
-userRouter.route("/api/v1/user/current-user").get(verifyJwt, getCurrentUser);
-userRouter.route("/api/v1/user/refresh-token").post( refreshAccessToken );
+userRouter.route("/signup").post(SignUpUser);
+userRouter.route("/signin").post(SignInUser);
+userRouter.route("/logout").post( verifyJwt,LogOutUser);
+userRouter.route("/current-user").get(verifyJwt, getCurrentUser);
+userRouter.route("/refresh-token").post( refreshAccessToken );
 
 
 
