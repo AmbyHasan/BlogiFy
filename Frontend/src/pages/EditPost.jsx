@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 import { Container, PostForm } from "../components";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function EditPost() {
       }
 
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/posts/get-post/${id}`, {
+        const res = await axiosInstance.get(`/api/v1/posts/get-post/${id}`, {
           withCredentials: true, // include cookies if auth uses cookies
         });
 

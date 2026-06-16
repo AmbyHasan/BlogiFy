@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import {Button , Input , Select ,  RTE} from "../index.js"
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import axios from "axios"
+import axiosInstance from "../../api/axiosConfig"
 
 
 //this is the post form component which will update the post if it already exists or will create a new post
@@ -43,9 +43,9 @@ const PostForm = ({post}) => {
 
       if(post){ //is the post already exists then update the exisiting post
         
-      response= await axios.put(
+      response= await axiosInstance.put(
         //post id is present in the post prop
-         `${import.meta.env.VITE_API_URL}/api/v1/posts/update-post/${post._id}`,
+         `/api/v1/posts/update-post/${post._id}`,
          formData ,
          {
           withCredentials:true ,
@@ -57,8 +57,8 @@ const PostForm = ({post}) => {
 
       }else{
 
-          response=await axios.post(
-           `${import.meta.env.VITE_API_URL}/api/v1/posts/create-post`,
+          response=await axiosInstance.post(
+             `/api/v1/posts/create-post`,
              formData ,
                        {
             withCredentials: true, //  include cookies

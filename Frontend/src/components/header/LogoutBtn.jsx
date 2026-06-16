@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from "react-redux";
 import { logout } from '../../store/authSlice';
-import axios from "axios";
+import axiosInstance from "../../api/axiosConfig";
 
 
 
@@ -11,7 +11,7 @@ function LogoutBtn() {
     const logoutHandler=async()=>{
     try{
         //calling the backend API
-        const res=await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/logout` ,{}  //empty body,
+        const res=await axiosInstance.post(`/api/v1/user/logout` ,{}  //empty body,
         , {withCredentials:true ,}); //for sending the cookies
 
         console.log(res.data);

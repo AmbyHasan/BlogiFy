@@ -4,7 +4,7 @@ import {login as authLogin} from "../store/authSlice"; //reducer from authSlice
 import {Button ,Input ,Logo} from "./index"
 import { useDispatch } from 'react-redux';
 import {useForm} from "react-hook-form";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 
 
 function Login() {
@@ -19,8 +19,8 @@ function Login() {
 
         try{
             //call the node js bakcend with login api
-            const res= await axios.post(
-              `${import.meta.env.VITE_API_URL}/api/v1/user/signin`,
+            const res= await axiosInstance.post(
+              `/api/v1/user/signin`,
               {
                 username:data.username ,
                 password:data.password ,
@@ -30,7 +30,8 @@ function Login() {
 
         if(res.data.statusCode==200){ //the user logged in successfully
             const userData= res.data.data.user;
-            dispatch(authLogin({userData})); //update the redux state
+            const accesstoken= res.data.data.accesstoken;
+            dispatch(authLogin({userData, accesstoken})); //update the redux state
             navigate("/") //since the user has logged so navigate him to other route  now
 
 

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -15,7 +15,7 @@ export default function Post() {
 
     useEffect(() => {
         if (id) {
-            axios.get(`${import.meta.env.VITE_API_URL}/api/v1/posts/get-post/${id}`, {
+            axiosInstance.get(`/api/v1/posts/get-post/${id}`, {
                 withCredentials: true,
             })
                 .then((res) => {
@@ -30,7 +30,7 @@ export default function Post() {
 
     const deletePost = async () => {
         try {
-            const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/posts/delete-post/${id}`, {
+            const res = await axiosInstance.delete(`/api/v1/posts/delete-post/${id}`, {
                 withCredentials: true,
             });
             if (res.data.success) {

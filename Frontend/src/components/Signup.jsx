@@ -4,7 +4,7 @@ import {login as authLogin} from "../store/authSlice";
 import {Button ,Input ,Logo} from "./index"
 import { useDispatch } from 'react-redux';
 import {useForm} from "react-hook-form";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 
 
 const Signup = () => {
@@ -18,8 +18,8 @@ const Signup = () => {
     setError("");
     try{
         //send the data to the backend signup route
-        const res=await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/user/signup`,
+        const res=await axiosInstance.post(
+        `/api/v1/user/signup`,
 
           data,
 
@@ -31,8 +31,9 @@ const Signup = () => {
         if(res.data?.statusCode==200){
             alert("Account created successfully!");
 
-            const user=res.data.data;
-            dispatch(authLogin({userData:user})); //update the redux state
+            const user=res.data.data.user;
+            const accesstoken=res.data.data.accesstoken;
+            dispatch(authLogin({userData:user, accesstoken})); //update the redux state
 
             reset(); //clear inputs
             navigate("/");

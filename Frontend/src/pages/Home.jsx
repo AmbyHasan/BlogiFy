@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ function Home() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/posts/get-user-posts`, {
+      const res = await axiosInstance.get(`/api/v1/posts/get-user-posts`, {
         withCredentials: true,
       });
 
@@ -48,7 +48,7 @@ function Home() {
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/v1/posts/delete-post/${postId}`, {
+      await axiosInstance.delete(`/api/v1/posts/delete-post/${postId}`, {
         withCredentials: true,
       });
       //after deleting the post call fetchPosts again for rendering the remaining post

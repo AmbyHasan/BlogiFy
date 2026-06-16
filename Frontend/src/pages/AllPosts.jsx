@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosConfig";
 import { Container, PostCard } from "../components";
 
 function AllPosts() {
@@ -9,7 +9,7 @@ function AllPosts() {
     // Fetch posts from backend
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/posts/list-posts`, {
+        const res = await axiosInstance.get(`/api/v1/posts/list-posts`, {
           withCredentials: true, //  include cookies if using auth cookies
         });
 

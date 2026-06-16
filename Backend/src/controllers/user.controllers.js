@@ -62,7 +62,7 @@ const SignUpUser= asyncHandler( async(req ,res)=>{
    return res.status(200)
    .cookie("accesstoken"  , accesstoken , cookieOptions)
    .cookie("refreshtoken" , refreshtoken , cookieOptions)
-   .json(new ApiResponse(200 , createdUser , "User created successfully"));
+   .json(new ApiResponse(200 , {user: createdUser, accesstoken, refreshtoken} , "User created successfully"));
 
     })
 

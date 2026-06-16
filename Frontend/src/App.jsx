@@ -1,7 +1,7 @@
 import { useState,useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { login, setLoading } from './store/authSlice';
-import axios from 'axios';
+import axiosInstance from './api/axiosConfig';
 
 import "./index.css";
 import "./App.css";
@@ -18,8 +18,8 @@ function App() {
   useEffect(() => {
     const checkCurrentUser = async () => {
       try {
-        const response = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/v1/user/current-user`,
+        const response = await axiosInstance.get(
+  `/api/v1/user/current-user`,
   {
     withCredentials: true,
   }
