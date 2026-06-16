@@ -24,6 +24,7 @@ dist/
 .DS_Store
 Thumbs.db
 
-# temp
-tmp/
-temp/
+
+
+Backend/public/temp/*
+!Backend/public/temp/.gitkeep
